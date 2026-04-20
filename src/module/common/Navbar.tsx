@@ -2,10 +2,18 @@ import { Link } from "react-router-dom";
 import { ShoppingCart, Heart, Search } from "lucide-react";
 import useCart from "../../store/useCart";
 import useWishList from "../../store/useWishList";
+import useAuth from "../../store/useAuth";
 
 const Navbar = () => {
-  const {coursesInCart} = useCart()
-  const {coursesInWishList} = useWishList()
+  const { coursesInCart } = useCart();
+  const { coursesInWishList } = useWishList();
+  const { name, role, isLoggedIn, setName, setIsLoggedIn, setRole } = useAuth();
+
+  const onHandleLogout = () => {
+    setName("");
+    setIsLoggedIn(false);
+    setRole("");
+  };
 
   return (
     <nav className="sticky top-0 z-50 w-full bg-white border-b shadow-sm px-6 py-3 flex items-center justify-between">
@@ -29,7 +37,10 @@ const Navbar = () => {
       </div>
 
       <div className="flex items-center gap-4">
-        <Link to="/wishlist" className="text-gray-600 hover:text-orange-600 relative">
+        <Link
+          to="/wishlist"
+          className="text-gray-600 hover:text-orange-600 relative"
+        >
           <Heart size={20} />
           {coursesInWishList.length > 0 && (
             <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
@@ -39,25 +50,48 @@ const Navbar = () => {
         </Link>
 
         <Link to="/carts" className="text-gray-600 hover:text-orange-600">
-        <span>{coursesInCart.length}</span>
-          <ShoppingCart size={20} />
+          <div className="relative inline-flex">
+            <ShoppingCart size={20} />
+
+            {coursesInCart.length > 0 && (
+              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                {coursesInCart.length}
+              </span>
+            )}
+          </div>
         </Link>
 
-        <>
-          <Link
-            to="/login"
-            className="text-sm border px-3 py-1 rounded hover:bg-gray-100"
-          >
-            Log in
-          </Link>
+        {isLoggedIn ? (
+          <div className="flex items-center gap-3">
+            <div className="flex flex-col text-sm">
+              <span className="font-semibold text-gray-800">{name}</span>
+              <span className="text-xs text-gray-500 capitalize">{role}</span>
+            </div>
 
-          <Link
-            to="/register"
-            className="text-sm bg-orange-600 text-white px-3 py-1 rounded hover:bg-orange-700"
-          >
-            Sign up
-          </Link>
-        </>
+            <button
+              onClick={onHandleLogout}
+              className="text-sm border px-3 py-1 rounded hover:bg-gray-100"
+            >
+              Logout
+            </button>
+          </div>
+        ) : (
+          <>
+            <Link
+              to="/login"
+              className="text-sm border px-3 py-1 rounded hover:bg-gray-100"
+            >
+              Log in
+            </Link>
+
+            <Link
+              to="/register"
+              className="text-sm bg-orange-600 text-white px-3 py-1 rounded hover:bg-orange-700"
+            >
+              Sign up
+            </Link>
+          </>
+        )}
       </div>
     </nav>
   );

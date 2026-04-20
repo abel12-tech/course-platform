@@ -78,13 +78,17 @@ const CourseCard = ({ course }: Props) => {
             {isWishlisted ? "Wishlisted" : "Wishlist"}
           </button>
 
-          <button
-            onClick={onHandleAddToCart}
-            className="flex-1 flex items-center justify-center gap-2 py-2 bg-orange-600 text-white rounded text-sm hover:bg-orange-700 transition"
-          >
-            <ShoppingCart size={16} />
-            Add to Cart
-          </button>
+          {course.price === 0 ? (
+            <div></div>
+          ) : (
+            <button
+              onClick={onHandleAddToCart}
+              className="flex-1 flex items-center justify-center gap-2 py-2 bg-orange-600 text-white rounded text-sm hover:bg-orange-700 transition"
+            >
+              <ShoppingCart size={16} />
+              Add to Cart
+            </button>
+          )}
         </div>
       </div>
     </div>

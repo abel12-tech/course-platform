@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 type ButtonProps = {
   text: string;
   variant?: "primary" | "secondary";
   loading?: boolean;
+  onHandleClick:(e:any)=>void
 };
 
 const Button = ({
