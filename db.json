@@ -6,6 +6,13 @@
       "email": "abel@gmail.com",
       "password": "123456",
       "role": "student"
+    },
+    {
+      "id": 2,
+      "name": "Bonsa Abene",
+      "email": "bonsa@gmail.com",
+      "password": "123456",
+      "role": "instructor"
     }
   ],
 
@@ -55,6 +62,63 @@
             {
               "id": 3,
               "title": "Intro to Node",
+              "videoUrl": "https://www.w3schools.com/html/mov_bbb.mp4"
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": 3,
+      "title": "Advanced React",
+      "instructor": "John Doe",
+      "category": "Frontend",
+      "price": 0,
+      "rating": 4.5,
+      "students": 1200,
+      "thumbnail": "https://picsum.photos/300/200?3",
+      "description": "Learn React from scratch",
+      "sections": [
+        {
+          "title": "Introduction",
+          "lessons": [
+            {
+              "id": 1,
+              "title": "Welcome",
+              "videoUrl": "https://www.w3schools.com/html/mov_bbb.mp4"
+            },
+            {
+              "id": 2,
+              "title": "What is React?",
+              "videoUrl": "https://www.w3schools.com/html/mov_bbb.mp4"
+            }
+          ]
+        }
+      ]
+    },
+     {
+      "id": 4,
+      "title": "Intermediate VueJs ",
+      "instructor": "John Doe",
+      "category": "Frontend",
+      "price": 0,
+      "rating": 4.5,
+      "students": 1200,
+      "thumbnail": "https://picsum.photos/300/200?4",
+      "description": "Learn React from scratch",
+      "sections": [
+        {
+          "title": "Introduction",
+          "lessons": [
+            {
+              "id": 1,
+              "title": "Welcome",
+              "videoUrl": "https://www.w3schools.com/html/mov_bbb.mp4"
+            },
+            {
+              "id": 2,
+              "title": "What is React?",
               "videoUrl": "https://www.w3schools.com/html/mov_bbb.mp4"
             }
           ]

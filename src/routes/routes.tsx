@@ -3,6 +3,8 @@ import { frontend_routes } from "../utils/frontend_routes";
 import HomePage from "../home/page/HomePage";
 import Login from "../home/page/Login";
 import Register from "../home/page/Register";
+import CartPage from "../home/page/CartPage";
+import WishListPage from "../home/page/WishListPage";
 const AppRoute = () => {
   return (
     <>
@@ -21,6 +23,16 @@ const AppRoute = () => {
           key={"urlRegister"}
           path={frontend_routes.register}
           element={<Register />}
+        />
+        <Route
+          key={"urlCarts"}
+          path={frontend_routes.carts}
+          element={<CartPage />}
+        />
+        <Route
+          key={"urlWishlist"}
+          path={frontend_routes.wishlist}
+          element={<WishListPage />}
         />
       </Routes>
     </>

@@ -2,15 +2,12 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import type { CartState } from "./states/cartState";
 import type { Course } from "../module/models/courses";
-const calculateTotal = (courses: Course[]) => {
-  return courses.reduce((total, course) => total + course.price, 0);
-};
+
 
 const useCart = create<CartState>()(
   persist(
     (set, get) => ({
       coursesInCart: [],
-      total: 0,
 
       addToCart: (course: Course) => {
         const exists = get().coursesInCart.find(
@@ -23,7 +20,6 @@ const useCart = create<CartState>()(
 
         set({
           coursesInCart: updated,
-          total: calculateTotal(updated),
         });
       },
 
@@ -34,14 +30,12 @@ const useCart = create<CartState>()(
 
         set({
           coursesInCart: updated,
-          total: calculateTotal(updated),
         });
       },
 
       clearCart: () =>
         set({
           coursesInCart: [],
-          total: 0,
         }),
     }),
     {

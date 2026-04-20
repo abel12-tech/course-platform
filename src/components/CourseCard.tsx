@@ -1,12 +1,33 @@
 import { Star, Heart, ShoppingCart } from "lucide-react";
 import type { Course } from "../module/models/courses";
-
+import useCart from "../store/useCart";
+import useWishList from "../store/useWishList";
 
 type Props = {
   course: Course;
 };
 
 const CourseCard = ({ course }: Props) => {
+  const { addToCart, coursesInCart } = useCart();
+  const { addToWishList, removeFromWishList, coursesInWishList } =
+    useWishList();
+
+  const isWishlisted = coursesInWishList.some((item) => item.id === course.id);
+
+  const toggleWishList = () => {
+    if (isWishlisted) {
+      removeFromWishList(course.id);
+    } else {
+      addToWishList(course);
+    }
+  };
+
+  const onHandleAddToCart = () => {
+    console.log("Add to cart clicked");
+    addToCart(course);
+    console.log("Carts", coursesInCart);
+  };
+
   return (
     <div className="border rounded-lg overflow-hidden bg-white shadow-sm hover:shadow-md transition group">
       <div className="relative">
@@ -16,8 +37,18 @@ const CourseCard = ({ course }: Props) => {
           className="h-40 w-full object-cover"
         />
 
-        <button className="absolute top-2 right-2 bg-white/90 p-2 rounded-full shadow hover:bg-white transition">
-          <Heart size={16} className="text-gray-700 group-hover:text-red-500" />
+        <button
+          onClick={toggleWishList}
+          className="absolute top-2 right-2 bg-white/90 p-2 rounded-full shadow hover:bg-white transition"
+        >
+          <Heart
+            size={16}
+            className={`${
+              isWishlisted
+                ? "text-red-500 cursor-pointer fill-red-500"
+                : "text-gray-700 cursor-pointer"
+            } transition`}
+          />
         </button>
       </div>
 
@@ -39,12 +70,18 @@ const CourseCard = ({ course }: Props) => {
         </p>
 
         <div className="flex gap-2 pt-2">
-          <button className="flex-1 flex items-center justify-center gap-2 py-2 border rounded text-sm hover:bg-gray-100 transition">
+          <button
+            onClick={toggleWishList}
+            className="flex-1 flex items-center justify-center gap-2 py-2 border rounded text-sm hover:bg-gray-100 transition"
+          >
             <Heart size={16} />
-            Wishlist
+            {isWishlisted ? "Wishlisted" : "Wishlist"}
           </button>
 
-          <button className="flex-1 flex items-center justify-center gap-2 py-2 bg-orange-600 text-white rounded text-sm hover:bg-orange-700 transition">
+          <button
+            onClick={onHandleAddToCart}
+            className="flex-1 flex items-center justify-center gap-2 py-2 bg-orange-600 text-white rounded text-sm hover:bg-orange-700 transition"
+          >
             <ShoppingCart size={16} />
             Add to Cart
           </button>

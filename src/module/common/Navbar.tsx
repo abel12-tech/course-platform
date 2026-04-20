@@ -1,7 +1,12 @@
 import { Link } from "react-router-dom";
 import { ShoppingCart, Heart, Search } from "lucide-react";
+import useCart from "../../store/useCart";
+import useWishList from "../../store/useWishList";
 
 const Navbar = () => {
+  const {coursesInCart} = useCart()
+  const {coursesInWishList} = useWishList()
+
   return (
     <nav className="sticky top-0 z-50 w-full bg-white border-b shadow-sm px-6 py-3 flex items-center justify-between">
       <div className="flex items-center gap-4">
@@ -24,11 +29,17 @@ const Navbar = () => {
       </div>
 
       <div className="flex items-center gap-4">
-        <Link to="/wishlist" className="text-gray-600 hover:text-orange-600">
+        <Link to="/wishlist" className="text-gray-600 hover:text-orange-600 relative">
           <Heart size={20} />
+          {coursesInWishList.length > 0 && (
+            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+              {coursesInWishList.length}
+            </span>
+          )}
         </Link>
 
-        <Link to="/cart" className="text-gray-600 hover:text-orange-600">
+        <Link to="/carts" className="text-gray-600 hover:text-orange-600">
+        <span>{coursesInCart.length}</span>
           <ShoppingCart size={20} />
         </Link>
 
