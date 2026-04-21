@@ -81,17 +81,6 @@ const Login = () => {
               placeholder="••••••••"
             />
 
-            <div className="flex justify-between text-sm">
-              <label className="flex items-center gap-2">
-                <input type="checkbox" />
-                Remember me
-              </label>
-
-              <Link to="#" className="text-orange-600 hover:underline">
-                Forgot password?
-              </Link>
-            </div>
-
             <Button onHandleClick={handleSubmit} text="Login"></Button>
           </form>
 

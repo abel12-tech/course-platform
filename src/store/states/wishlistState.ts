@@ -5,4 +5,5 @@ export interface WishListState {
   addToWishList: (course: Course) => void;
   removeFromWishList: (courseId: number) => void;
   moveToCart: (course: Course) => void;
+  clearWishList: () => void;
 }

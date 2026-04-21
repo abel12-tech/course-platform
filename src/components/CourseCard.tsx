@@ -2,6 +2,7 @@ import { Star, Heart, ShoppingCart } from "lucide-react";
 import type { Course } from "../module/models/courses";
 import useCart from "../store/useCart";
 import useWishList from "../store/useWishList";
+import useAuth from "../store/useAuth";
 
 type Props = {
   course: Course;
@@ -9,12 +10,17 @@ type Props = {
 
 const CourseCard = ({ course }: Props) => {
   const { addToCart, coursesInCart } = useCart();
+  const { isLoggedIn } = useAuth();
   const { addToWishList, removeFromWishList, coursesInWishList } =
     useWishList();
 
   const isWishlisted = coursesInWishList.some((item) => item.id === course.id);
 
   const toggleWishList = () => {
+      if (!isLoggedIn) {
+        alert("Please log in to add to your wishlist.");
+        return;
+      }
     if (isWishlisted) {
       removeFromWishList(course.id);
     } else {
@@ -24,6 +30,10 @@ const CourseCard = ({ course }: Props) => {
 
   const onHandleAddToCart = () => {
     console.log("Add to cart clicked");
+    if (!isLoggedIn) {
+      alert("Please log in to add courses to your cart.");
+      return;
+    }
     addToCart(course);
     console.log("Carts", coursesInCart);
   };

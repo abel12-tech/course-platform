@@ -30,6 +30,10 @@ const useWishList = create<WishListState>()(
         get().removeFromWishList(course.id);
         useCart.getState().addToCart(course);
       },
+      clearWishList: () =>
+        set({
+          coursesInWishList: [],
+        }),
     }),
     {
       name: "wishlist-state",

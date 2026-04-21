@@ -5,14 +5,16 @@ import useWishList from "../../store/useWishList";
 import useAuth from "../../store/useAuth";
 
 const Navbar = () => {
-  const { coursesInCart } = useCart();
-  const { coursesInWishList } = useWishList();
+  const { coursesInCart,clearCart} = useCart();
+  const { coursesInWishList ,clearWishList} = useWishList();
   const { name, role, isLoggedIn, setName, setIsLoggedIn, setRole } = useAuth();
 
   const onHandleLogout = () => {
     setName("");
     setIsLoggedIn(false);
     setRole("");
+    clearCart();
+    clearWishList();
   };
 
   return (
